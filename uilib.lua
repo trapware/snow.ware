@@ -11,7 +11,7 @@ if getgenv().library then
     getgenv().library:Unload()
 end
 
-local library = {design = getgenv().design == "kali" and "kali" or "uwuware", tabs = {}, draggable = true, flags = {}, title = "CheatX", open = false, popup = nil, instances = {}, connections = {}, options = {}, notifications = {}, tabSize = 0, theme = {}, foldername = "cheatx_cnfgs", fileext = ".txt"}
+local library = {design = getgenv().design == "kali" and "kali" or "uwuware", tabs = {}, draggable = true, flags = {}, title = "snow.ware", open = false, popup = nil, instances = {}, connections = {}, options = {}, notifications = {}, tabSize = 0, theme = {}, foldername = "cheatx_cnfgs", fileext = ".txt"}
 getgenv().library = library
 
 --Locals
@@ -1991,6 +1991,10 @@ function library:AddTab(title, pos)
                     end
                 end
 
+                function option:Clear()
+                table.clear(self.values)
+                end
+
                 function option:AddColor(subOption)
                     subOption = typeof(subOption) == "table" and subOption or {}
                     subOption.sub = true
@@ -2444,6 +2448,7 @@ function library:Close()
         self.main.Visible = self.open
     end
 end
+
 
 function library:Init()
     if self.hasInit then return end
