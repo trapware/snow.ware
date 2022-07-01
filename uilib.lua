@@ -1032,6 +1032,10 @@ library.createList = function(option, parent)
             end
         end
 
+        function option:Clear()
+           table.clear(self.Values)
+            end
+
         local label = library:Create("TextLabel", {
             ZIndex = 4,
             Size = UDim2.new(1, 0, 0, 20),

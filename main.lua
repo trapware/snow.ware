@@ -1,3 +1,4 @@
+---@diagnostic disable: unused-local
 loadstring(game:HttpGet('https://raw.githubusercontent.com/trapware/snow.ware/main/uilib.lua'))()
 
 
@@ -5,22 +6,26 @@ loadstring(game:HttpGet('https://raw.githubusercontent.com/trapware/snow.ware/ma
 local player = game:GetService("Players").LocalPlayer
 
 -- [Features UI] ------------------------------------------------------------------------------------------------------------------------------------------------------------
-local FeaturesTab = library:AddTab("Features"); 
+local FeaturesTab = library:AddTab("Features");
 local FC1 = FeaturesTab:AddColumn();
 local GC = FC1:AddSection("Gun Configurations");
 
 -- gun configurations
 player.CharacterAdded:Connect(function(character)
-    
+
 end)
+local classChange = player.StarterWeps
 local findGuns = player.RealInv
 local gunList = GC:AddList({text = "Gun Selected", values = {}, callback = function(String)
     print(String)
 end});
 
-findGuns.ChildAdded:Connect(function(child)
-gunList:Clear()
-gunList:AddValue(child.Name)
+for _, gun in pairs(findGuns:GetChildren()) do
+gunList:AddValue(gun.Name)
+end
+
+classChange.ChildAdded:Connect(function(child)
+gunList:RemoveValue()
 end)
 
 
@@ -37,10 +42,10 @@ GC:AddSlider({text = "Bullets", flag = "BulletsConfig", min = 0, max = 100, valu
 end});
 
 -- [Library Settings UI] -----------------------------------------------------------------------------------------------------------------------------------------------------
-local SettingsTab = library:AddTab("Settings"); 
-local SettingsColumn = SettingsTab:AddColumn(); 
-local SettingsColumn2 = SettingsTab:AddColumn(); 
-local SettingSection = SettingsColumn:AddSection("Menu"); 
+local SettingsTab = library:AddTab("Settings");
+local SettingsColumn = SettingsTab:AddColumn();
+local SettingsColumn2 = SettingsTab:AddColumn();
+local SettingSection = SettingsColumn:AddSection("Menu");
 local ConfigSection = SettingsColumn2:AddSection("Configs");
 local Warning = library:AddWarning({type = "confirm"});
 
